@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}{% if target %} {{ target.ip }} {% else %} Weaponize {% endif %}{% endblock %}
+
+{% block content %}
+    <div id="spinner" class="text-center mt-1 not-visible">
+        <div class="p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+            <div class="text-center">
+                <p><strong>Running your Module</strong></p>
+                <div class="spinner-border text-success ml-auto" role="status" aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="data-box">
+
+        {% include 'recon/sections/target-detail.html' %}
+        {% include 'recon/sections/service-detail.html' %}
+        {% include 'recon/sections/exploit-detail.html' %}
+        {% include 'recon/sections/messages.html' %}
+
+        <div class="table-responsive p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+            <h3>Delivery methods</h3>
+            <form action="{% url 'recon:delivery' %}" method="post">
+                {% csrf_token %}
+            <table class="table">
+{#                <thead class="table-header-two">#}
+{#                    <tr>#}
+{#                        <th scope="col">#</th>#}
+{#                        <th scope="col">Name</th>#}
+{#                        <th scope="col">Argv1</th>#}
+{#                        <th scope="col">Argv2</th>#}
+{#                        <th scope="col">Argv3</th>#}
+{#                        <th scope="col">Argv4</th>#}
+{#                        {% if module.argv5 %}<th scope="col">Argv5</th>{% endif %}#}
+{#                        {% if module.argv6 %}<th scope="col">Argv6</th>{% endif %}#}
+{#                        {% if module.argv7 %}<th scope="col">Argv7</th>{% endif %}#}
+{#                        {% if module.argv8 %}<th scope="col">Argv8</th>{% endif %}#}
+{#                        {% if module.argv9 %}<th scope="col">Argv9</th>{% endif %}#}
+{#                    </tr>#}
+{#                </thead>#}
+                <tbody>
+{#                {% for module in modules %}#}
+                    <tr>
+                        <td><input type="checkbox" name="deliver" value="1"/></td>
+                        <td>Manual - (pop a shell)</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="deliver" value="2"/></td>
+{#                        <td><a href="{% url 'recon:tool-detail' module.id %}">{{ module.name }}</a></td>#}
+                        <td>Metasploit - (open exploit in msfconsole)</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="deliver" value="3"/></td>
+                        <td>Host exploit on server - (Host exploit to be triggered elsewhere)</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="deliver" value="4"/></td>
+                        <td>Proxy - (proxy request/response and headers)</td>
+                    </tr>
+{#                {% endfor %}#}
+                </tbody>
+                </table>
+                <button class="btn btn-primary" onclick="scanning()">Exploit</button>
+            </form>
+        </div>
+        {% include 'recon/sections/view-exploit.html' %}
+    </div>
+{% endblock %}

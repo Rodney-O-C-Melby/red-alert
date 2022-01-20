@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Recon{% endblock %}
+
+{% block content %}
+
+        <div id="spinner-box" class="text-center mt-1 not-visible">
+            <div class="p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+                <div class="text-center">
+                    <p><strong>Scanning your target please be patient</strong></p>
+                    <div class="spinner-border text-success ml-auto" role="status" aria-hidden="true"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="data-box">
+{#    {% include 'aside.html' %}#}
+            {% include 'recon/sections/messages.html' %}
+
+            <div class="d-flex flex-column align-items-center p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+                <div class="lh-100 text-center">
+                    <form class="input-group" action="{% url 'recon:home' %}" method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="btn btn-primary" onclick="scanning()">
+                            Scan
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            {% if modules %}
+            <div class="p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+                <h3>Recon modules</h3>
+                <table class="table table-borderless">
+                    <thead class="table-header-two">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Arguments</th>
+{#                            <th scope="col">Argv2</th>#}
+{#                            <th scope="col">Argv3</th>#}
+                            {% if module.argv4 %}<th scope="col">Argv4</th>{% endif %}
+                            {% if module.argv5 %}<th scope="col">Argv5</th>{% endif %}
+                            {% if module.argv6 %}<th scope="col">Argv6</th>{% endif %}
+                            {% if module.argv7 %}<th scope="col">Argv7</th>{% endif %}
+                            {% if module.argv8 %}<th scope="col">Argv8</th>{% endif %}
+                            {% if module.argv9 %}<th scope="col">Argv9</th>{% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for module in modules %}
+                        <tr>
+                            <td><a href="{% url 'recon:tool-detail' module.id %}">{{ module.name }}</a></td>
+                                <td>
+                            {% if module.argv1 %}{{ module.argv1 }} {% endif %}
+                            {% if module.argv2 %}{{ module.argv2 }} {% endif %}
+                            {% if module.argv3 %}{{ module.argv3 }} {% endif %}
+                            {% if module.argv4 %}{{ module.argv4 }} {% endif %}
+                            {% if module.argv5 %}{{ module.argv5 }} {% endif %}
+                            {% if module.argv6 %}{{ module.argv6 }} {% endif %}
+                            {% if module.argv7 %}{{ module.argv7 }} {% endif %}
+                            {% if module.argv8 %}{{ module.argv8 }} {% endif %}
+                            {% if module.argv9 %}{{ module.argv9 }} {% endif %}
+                                target-ip
+                                </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    </table>
+                    <a href="{% url 'recon:add-tool' %}">
+                        <button class="btn btn-primary">New</button>
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if targets %}
+                <div class="p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+                    <h3 class="">Scans</h3>
+                    {% load static %}
+
+                    <div class="table-responsive-sm px-4 rounded">
+                        <table class="table table-sm thead-dark">
+                        <thead class="table-header-two">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">IP</th>
+                                <th scope="col">Hostname</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">System</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for target in targets %}
+                            <tr>
+                                <td>
+    {#                            <img src="{% static 'images/Linux-Logo.png' %}" alt="Linux" width="22" />#}
+                                    {% if target.system == "Linux" %}
+                                        <img src="{% static 'images/Linux-Logo.png' %}" alt="Linux" width="22" />
+                                    {% elif "Win" in target.operating_system %}
+                                        <img src="{% static 'images/windows-icon.png' %}" alt="Win" width="22" />
+                                    {% endif %}
+                                </td>
+                                <td><a href="/recon?tid={{ target.id }}">{{ target.ip }}</a></td>
+                                <td>{{ target.hostname }}</td>
+                                <td>
+                                    {% if target.mode == 1 %}TCP{% elif target.mode == 2 %}UDP
+                                    {% elif target.mode == 3 %}Silent{% elif target.mode == 4 %}Attack
+                                    {% elif target.mode == 4 %}Manual
+                                    {% endif %}
+                                </td>
+                                <td>{{ target.operating_system }} {{ target.kernel }}</td>
+    {#                            <td>{{ target.kernel }}</td>#}
+    {#                            <td>{{ target.date }}</td>#}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+            {% else %}
+                <p>Please scan a target.</p>
+            {% endif %}
+            </div>
+
+        </div>
+
+{% endblock %}

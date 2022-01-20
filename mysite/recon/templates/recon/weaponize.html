@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}{% if target %} Weaponize:{{ target.ip }} {% else %} Weaponize {% endif %}{% endblock %}
+
+{% block content %}
+    <div id="spinner" class="text-center mt-1 not-visible">
+        <div class="p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+            <div class="text-center">
+                <p><strong>Running your Module</strong></p>
+                <div class="spinner-border text-success ml-auto" role="status" aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="data-box">
+
+        {% include 'recon/sections/target-detail.html' %}
+        {% include 'recon/sections/service-detail.html' %}
+        {% include 'recon/sections/messages.html' %}
+
+        {% if modules %}
+        <div class="table-responsive p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+            <h3>Choose Module</h3>
+            <form action="{% url 'recon:run-tool' target.id service.id %}" method="post">
+                {% csrf_token %}
+            <table class="table">
+                <thead class="table-header-two">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Argv1</th>
+                        <th scope="col">Argv2</th>
+                        <th scope="col">Argv3</th>
+                        <th scope="col">Argv4</th>
+                        {% if module.argv5 %}<th scope="col">Argv5</th>{% endif %}
+                        {% if module.argv6 %}<th scope="col">Argv6</th>{% endif %}
+                        {% if module.argv7 %}<th scope="col">Argv7</th>{% endif %}
+                        {% if module.argv8 %}<th scope="col">Argv8</th>{% endif %}
+                        {% if module.argv9 %}<th scope="col">Argv9</th>{% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for module in modules %}
+                    <tr>
+                        <td><input type="checkbox" name="module_id" value="{{ module.id }}"/></td>
+                        <td><a href="{% url 'recon:tool-detail' module.id %}">{{ module.name }}</a></td>
+                        {% if module.argv1 %}<td>{{ module.argv1 }}</td>{% endif %}
+                        {% if module.argv2 %}<td>{{ module.argv2 }}</td>{% endif %}
+                        {% if module.argv3 %}<td>{{ module.argv3 }}</td>{% endif %}
+                        {% if module.argv4 %}<td>{{ module.argv4 }}</td>{% endif %}
+                        {% if module.argv5 %}<td>{{ module.argv5 }}</td>{% endif %}
+                        {% if module.argv6 %}<td>{{ module.argv6 }}</td>{% endif %}
+                        {% if module.argv7 %}<td>{{ module.argv7 }}</td>{% endif %}
+                        {% if module.argv8 %}<td>{{ module.argv8 }}</td>{% endif %}
+                        {% if module.argv9 %}<td>{{ module.argv9 }}</td>{% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+                <button class="btn btn-primary" onclick="scanning()">Run Module</button>
+            </form>
+        </div>
+        {% endif %}
+
+        {% include 'recon/sections/exploit_db_select.html' %}
+
+        {% if exploits %}
+            <div class="p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+                <h3>Choose Exploit</h3>
+                <input class="form-control" id="myInput" type="text" placeholder="Search">
+                <form action="{% url 'recon:pick-exploit' target.id service.id %}" method="post">
+                {% csrf_token %}
+                <div class="table-responsive-sm px-4 rounded">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">OS</th>
+                                <th scope="col">Protocol</th>
+                                <th scope="col">Program</th>
+                                <th scope="col">Versions</th>
+                                <th scope="col">CVE</th>
+                                <th scope="col">CVSS</th>
+        {#                        <th scope="col">Args</th>#}
+                                <th scope="col">Language</th>
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                        {% for exploit in exploits %}
+                            <tr>
+                                <td><input type="checkbox" name="exploit_id" value="{{ exploit.id }}"/></td>
+                                <td>{{ exploit.name }}</td>
+                                <td>{{ exploit.system }}</td>
+                                <td>{{ exploit.protocol }}</td>
+                                <td>{{ exploit.program }}</td>
+                                <td>{{ exploit.versions }}</td>
+                                <td>{{ exploit.cve }}</td>
+                                <td>{{ exploit.cvs }}</td>
+        {#                        <td>{{ exploit.args }}</td>#}
+                                <td>{{ exploit.language }}</td>
+                {#                <td>{{ exploit.url }}</td>#}
+                {#                <td>{{ exploit.location }}</td>#}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-primary">Add Exploit</button>
+                </form>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

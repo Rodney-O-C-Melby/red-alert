@@ -1,0 +1,17 @@
+# Install WSL 2 (Windows Subsystem for Linux)
+
+# turn features on or off
+Windows Subsystem for Linux -> on
+Virtual Machine Platform -> on
+
+restart
+
+# install wsl update
+double click msi file, or get new from windows.
+
+# microsoft store
+install kali linux
+
+# run linux install.sh in kali
+
+# run ./redalert program

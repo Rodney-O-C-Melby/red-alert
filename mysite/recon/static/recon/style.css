@@ -1,0 +1,159 @@
+/*!*DARK GOLD: #D1A92B GOLD: #EFC95C  MID RED: #AD0000  GREEN: #2D9A15 *!*/
+/*!*LIGHT RED: #D62F17  DARK RED: #600000 GREY: #545859 black n light grey*!*/
+
+/* css to hide and show whilst scanning */
+.not-visible { display: none; }
+.visible { display: block; }
+.text-red { color: #af0000; }
+.text-green { color: #00d10d; }
+
+/* message box success and error */
+.success {
+    background-color: #75ff7e;
+    padding: 10px 10px;
+    border: 1px solid #00d10d;
+    border-radius: 5px;
+    color: #08730f;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.error {
+    background-color: #ff4949;
+    padding: 10px 10px;
+    border: 1px solid #af0000;
+    border-radius: 5px;
+    color: #af0000;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+/* nav colour edits hover and active */
+nav {
+    background-color: #000038;
+    /*background-color: #333333;*/
+}
+.nav-link {
+    border-radius: 5px;
+    padding: 5px;
+}
+nav a {
+    padding: 5px;
+}
+.hover-green-bg:hover {
+    background-color: #08730f;
+    border-radius: 5px;
+    padding: 5px;
+}
+.hover-red-bg:hover {
+    background-color: #af0000;
+    border-radius: 5px;
+    padding: 5px;
+}
+.hover-gold-bg:hover {
+    background-color: #D1A92B;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+nav .active .hover-green-bg {
+    background-color: #08730f;
+    border-radius: 5px;
+    padding: 5px;
+}
+nav .active .hover-red-bg {
+    background-color: #af0000;
+    border-radius: 5px;
+    padding: 5px;
+}
+nav .active .hover-gold-bg {
+    background-color: gold;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* override table header column */
+.table-header {
+    background-color: #00d10d;
+    color: #f1f1f1;
+}
+.table-header-two {
+    background-color: #f8f8f8;
+    /*color: #b2b2b2;*/
+    /*color: #f1f1f1;*/
+}
+
+/* footer to match header */
+footer {
+    background-color: #000038;
+    color: #f1f1f1;
+    width: 100%;
+    clear: both;
+    min-height: 5vh;
+    display: block;
+    position: relative;
+    bottom: 0;
+}
+
+/*aside {*/
+/*    width: 200px;*/
+/*    height: 100%;*/
+/*    float: left;*/
+/*    position: relative;*/
+/*    display: block;*/
+/*    z-index:1;*/
+/*    left:0;*/
+/*    overflow-x:hidden;*/
+/*    border-right: 1px solid #f1f1f1;*/
+/*}*/
+/*aside ul {*/
+/*    list-style-type:none;*/
+/*    padding:0;*/
+/*    margin:0;*/
+/*}*/
+/*aside li {*/
+/*    list-style:none;*/
+/*    background-image:none;*/
+/*    background-repeat: no-repeat;*/
+/*    background-position:0;*/
+/*    border-top: 1px solid #f1f1f1;*/
+/*    border-bottom: 1px solid #f1f1f1;*/
+/*}*/
+/*aside a {*/
+/*    padding:20px;*/
+/*    text-decoration: none;*/
+/*    font-size:1em;*/
+/*    color: #333333;*/
+/*    display:block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*aside a:hover {*/
+/*    padding:20px;*/
+/*    background-color: #333333;*/
+/*    color: #f1f1f1;*/
+/*    font-weight: bolder;*/
+/*}*/
+/*aside .header {*/
+/*    display:inline-block;*/
+/*    padding: 10px;*/
+/*}*/
+/*aside h2{*/
+/*    display:inline-block;*/
+/*    color: #333333;*/
+/*    font-size: 0.9em;*/
+/*    text-align: left;*/
+/*    padding-left: 10px;*/
+/*    padding-right: 10px;*/
+/*}*/
+
+/*main{*/
+/*    position: relative;*/
+/*    display: block;*/
+/*    padding: 20px;*/
+/*    min-height: 70vh;*/
+/*    !*padding-left: 220px;*!*/
+/*    !*padding-top: 3vh;*!*/
+/*    !*padding-bottom: 2vh;*!*/
+/*    !*padding-right: 20px;*!*/
+/*    !*min-height: 75vh;*!*/
+/*}*/

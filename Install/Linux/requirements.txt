@@ -1,0 +1,19 @@
+### SYSTEM PACKAGES
+# python
+# exploit db
+# nmap
+# sqlite
+# pip
+##
+## sudo apt-get install exploitdb python3 python3-pip nmap sqlite3
+# 
+# sudo chown -R user:user mysite/
+##
+## Install
+## sudo setcap cap_net_raw,cap_net_admin,cap_net_bind_service+eip $(which nmap)
+##
+### PIP PACKAGES
+#PySide2>=5.15.2
+python-nmap
+Django
+ares

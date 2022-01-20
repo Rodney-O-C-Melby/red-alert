@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}{% if target %} Services:{{ target.ip }} {% else %} Services {% endif %}{% endblock %}
+
+{% block content %}
+        {% include 'recon/sections/target-detail.html' %}
+        {% include 'recon/sections/messages.html' %}
+
+        {% if services %}
+        <div class="table-responsive p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+            <h3><small>Open Services</small></h3>
+            <form action="{% url 'recon:target' %}" method="post">
+            {% csrf_token %}
+            <table class="table table-sm table-borderless">
+{#                <thead>#}
+{#                <tr>#}
+{#                    <th scope="col"></th>#}
+{#                    <th scope="col"><small class="text-secondary">Port</small></th>#}
+{#                    <th scope="col"><small class="text-secondary">Proto</small></th>#}
+{#                    <th scope="col"><small class="text-secondary">State</small></th>#}
+{#                    <th scope="col"><small class="text-secondary">Service</small></th>#}
+{#                    <th scope="col"><small class="text-secondary">Program</small></th>#}
+{#                    <th scope="col"><small class="text-secondary">Version</small></th>#}
+{#                    <th scope="col"><small class="text-secondary">Extra</small></th>#}
+{#                    <th scope="col"><small class="text-secondary">Script</small></th>#}
+{#                </tr>#}
+{#                </thead>#}
+                <tbody>
+                {% for service in services %}
+                    <tr>
+                        <td><input type="checkbox" name="checkbox" value="{{ service.id }}" /></td>
+                    {% if service.port_number %}
+                        <td><small>{{ service.port_number }}</small></td>
+                    {% endif %}
+                    {% if service.port_protocol %}
+                        <td><small>{{ service.port_protocol }}</small></td>
+                    {% endif %}
+                    {% if service.port_state %}
+                        <td><smalls>{{ service.port_state }}</smalls></td>
+                    {% endif %}
+                    {% if service.service %}
+                        <td><small>{{ service.service }}</small></td>
+                    {% endif %}
+                    {% if service.port_program %}
+                        <td><small>{{ service.port_program }}</small></td>
+                    {% endif %}
+                    {% if service.port_version %}
+                        <td><small>{{ service.port_version }}</small></td>
+                    {% endif %}
+                    {% if service.port_extra_info %}
+                        <td><small>{{ service.port_extra_info }}</small></td>
+                    {% endif %}
+                    {% if service.port_script %}
+                        <td><small>{{ service.port_script }}</small></td>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <input type="hidden" name="tid" value="{{ target.id }}">
+            <button class="btn btn-primary" type="submit">Weaponize</button>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if k_info %}
+        <div class="table-responsive p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+            {% for result in k_info %}
+{#                {{ result.id }}#}
+                <h3>{{ result.title }}</h3>
+                </br>
+                {{ result.description }}
+                </br>
+{#                {{ result.cvss2 }}#}
+                {{ result.cvss2.cvssV2.baseScore }}
+{#                </br>#}
+{#                {{ result.cvelist }}#}
+                </br>
+                {{ result.published }}
+                </br>
+                {{ result.lastseen }}
+                </br>
+                {{ result.cvss3.cvssV2 }}
+                {{ result.cvss3.cvssV2.accessVector }}
+                </br>
+                {{ result.cvss3.cvssV2.authentication }}
+                </br>
+                <p>C</p>
+                {{ result.cvss3.cvssV2.confidentialityImpact }}
+                </br>
+                <p>I</p>
+                {{ result.cvss3.cvssV2.integrityImpact }}
+                </br>
+                <p>A</p>
+                {{ result.cvss3.cvssV2.availabilityImpact }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% include 'recon/sections/exploit_db.html' %}
+
+{% endblock %}

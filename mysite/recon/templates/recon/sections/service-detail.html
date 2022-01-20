@@ -1,0 +1,27 @@
+    {% if service %}
+        <div class="d-flex align-items-center p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+            {% load static %}
+            <table class="table table-sm table-borderless my-1">
+                <thead>
+                    <tr>
+                        {% if service.port_number %}<th scope="col"><small>Port</small></th>{% endif %}
+                        {% if service.port_protocol %}<th scope="col"><small>Protocol</small></th>{% endif %}
+                        {% if service.service %}<th scope="col"><small>Service</small></th>{% endif %}
+                        {% if service.port_program %}<th scope="col"><small>Program</small></th>{% endif %}
+                        {% if service.port_version %}<th scope="col"><small>Version</small></th>{% endif %}
+                        {% if service.port_extra_info %}<th scope="col"><small>Extra</small></th>{% endif %}
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    <tr>
+                        {% if service.port_number %}<td><small>{{ service.port_number }}</small></td>{% endif %}
+                        {% if service.port_protocol %}<td><small>{{ service.port_protocol }}</small></td>{% endif %}
+                        {% if service.service %}<td><small>{{ service.service }}</small></td>{% endif %}
+                        {% if service.port_program %}<td><small>{{ service.port_program }}</small></td>{% endif %}
+                        {% if service.port_version %}<td><small>{{ service.port_version }}</small></td>{% endif %}
+                        {% if service.port_extra_info %}<td><small>{{ service.port_extra_info }}</small></td>{% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endif %}

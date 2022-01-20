@@ -1,0 +1,43 @@
+    {% if target %}
+        <div class="d-flex align-items-center p-3 my-3 text-dark bg-white border border-gray rounded shadow-sm">
+            {% load static %}
+            <table class="table table-sm table-borderless my-1">
+{#                <thead>#}
+{#                    <tr>#}
+{#                        {% if target.system %}<th scope="col">OS</th>{% endif %}#}
+{#                        {% if target.ip %}<th scope="col">IP</th>{% endif %}#}
+{#                        {% if target.hostname %}<th scope="col">Hostname</th>{% endif %}#}
+{#                        {% if target.system %}<th scope="col">System</th>{% endif %}#}
+{#                        {% if target.kernel %}<th scope="col">Kernel</th>{% endif %}#}
+{#                        {% if target.mac %}<th scope="col">Mac</th>{% endif %}#}
+{#                        {% if target.vendor %}<th scope="col">Vendor</th>{% endif %}#}
+{#                    </tr>#}
+{#                </thead>#}
+                <tbody class="bg-white">
+                    <tr>
+                    {% if target.system %}
+                        <td>
+                            {% if target.system == "Linux" %}
+                                <img src="{% static 'images/Linux-Logo.png' %}" alt="Linux" width="22" />
+                            {% elif target.system == "Win" %}
+                                <img src="{% static 'images/windows-icon.png' %}" alt="Win" width="22" />
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                        {% if target.ip %}<td><small>{{ target.ip }}</small></td>{% endif %}
+                        {% if target.hostname %}<td><small>{{ target.hostname }}</small></td>{% endif %}
+                        {% if target.system %}<td><small>{{ target.system }}</small></td>{% endif %}
+                        {% if target.kernel %}<td><small>{{ target.kernel }}</small></td>{% endif %}
+                    </tr>
+                    {% if target.mac or target.vendor or target.cpe %}
+                    <tr>
+                        <td></td>
+                        {% if target.mac %}<td><sub class="text-secondary">{{ target.mac }}</sub></td>{% endif %}
+                        {% if target.vendor %}<td><sub class="text-secondary">{{ target.vendor }}</sub></td>{% endif %}
+                        {% if target.cpe %}<td><sub class="text-secondary">{{ target.cpe }}</sub></td>{% endif %}
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}

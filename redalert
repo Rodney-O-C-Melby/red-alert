@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+exec python mysite/manage.py runserver
+# get root privs for this script
+#if (($EUID != 0)); then
+#    #echo "Granting root privileges for this script"
+#    if [[ -t 1 ]]; then
+#        sudo "$0" "$@"
+#    else
+#        gksu "$0" "$@"
+#    fi
+#    exit
+#fi
+
+#echo "COMMAND & CONQUER: Red Alert running ..."
+#echo ""
+#echo "Starting server at http://127.0.0.1:8000/pentest/"
+#echo "Quit the server with CONTROL-C."
+
+
+#exec sudo python $PWD/mysite/manage.py runserver #1> "/dev/null"  # pipe output to null, show errors
+#exec python $PWD/mysite/manage.py runserver 1> "/dev/null"
+#exec screen -S screen1
+#exec screen -S screen2
+#exec CTRL-A '"'
+
+#exec xterm -e command
+
+#PID=$(exec ps -eaf | grep redalert | awk -F ' ' '{print $2}')
+#exec kill "${PID}"
+
+#exec python mysite/manage.py runserver
+
+
+# open browser and navigate to url
+#exec xdg-open http://127.0.0.1:8000/pentest/

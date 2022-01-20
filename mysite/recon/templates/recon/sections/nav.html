@@ -1,0 +1,61 @@
+    {% url 'recon:home' as home %}
+    {% url 'recon:target' as target %}
+    {% url 'recon:weaponize' as weaponize %}
+    {% url 'recon:delivery' as delivery %}
+{#    {% url 'pentest:delivery' as delivery %}#}
+
+    <nav class="navbar navbar-default navbar-dark navbar-expand">
+        <a class="navbar-brand" href="{% url 'recon:home' %}">
+            <h1 class="px-2" style="font-size: 0.8em;">
+                <strong class="text-warning">C&C:</strong><strong class="text-red">RED ALERT</strong>
+            </h1>
+            <h2 class="px-2 text-green" style="font-size: 0.5em;">COMMAND&CONQUER</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {% if request.path == home or request.path == target %} active {%endif%}">
+                    <a class="nav-link hover-green-bg mx-1" href="{% url 'recon:home' %}">
+                        <strong>Recon</strong>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.path == weaponize %} active {%endif%}">
+                    <a class="nav-link hover-gold-bg mx-1" href="{% url 'recon:home' %}">
+                        <strong>Weaponize</strong>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.path == delivery %} active {%endif%}">
+                    <a class="nav-link hover-red-bg mx-1" href="{% url 'recon:home' %}">
+                        <strong>Delivery</strong>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.path == recon %} active {%endif%}">
+                    <a class="nav-link hover-green-bg mx-1" href="{% url 'recon:home' %}">
+                        <strong>Exploit</strong>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.path == recon %} active {%endif%}">
+                    <a class="nav-link hover-gold-bg mx-1" href="{% url 'recon:home' %}">
+                        <strong>Install</strong>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.path == recon %} active {%endif%}">
+                    <a class="nav-link hover-red-bg mx-1" href="{% url 'recon:home' %}">
+                        <strong>C&C:C2</strong>
+                    </a>
+                </li>
+                <li class="nav-item {% if request.path == recon %} active {%endif%}">
+                    <a class="nav-link hover-green-bg mx-1" href="{% url 'recon:home' %}">
+                        <strong>Objectives</strong>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="float-right">
+            <form class="mt-2 mt-md-0" action="{% url 'recon:clean' %}">
+                <button class="btn btn-danger my-2 my-sm-0 mx-3" type="submit">Tear Down</button>
+            </form>
+        </div>
+    </nav>
